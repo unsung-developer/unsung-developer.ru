@@ -1,35 +1,35 @@
 //Кнопка меню
 $('.header--about__hidden-button').click(function(event){
     event.preventDefault();
-  });
+});
 
-  $('.header--about__hidden-button').click(function(){
+$('.header--about__hidden-button').click(function(){
+  $('.header--about__list').slideToggle()
+});
+
+$('.header--about__item').click(function(){
+  if ($(window).width() < 1300) {
     $('.header--about__list').slideToggle()
-  });
+  }
+});
 
-  $('.header--about__item').click(function(){
-    if ($(window).width() < 1300) {
-      $('.header--about__list').slideToggle()
-    }
-  });
-
-  $(window).resize(function(){
-    if ($(window).width() > 320) {
-      $('.header--about__list').removeAttr('style');
-    }
-  });
+$(window).resize(function(){
+  if ($(window).width() > 320) {
+    $('.header--about__list').removeAttr('style');
+  }
+});
 
   //Скроллы
-  $('.header--about__item a, .footer--container__item a').click(function(event){
-    event.preventDefault();
+$('.header--about__item a, .footer--container__item a').click(function(event){
+  event.preventDefault();
 
-    let href = $(this).attr('href');
-    let offset = $(href).offset().top;
+  let href = $(this).attr('href');
+  let offset = $(href).offset().top;
     
-    $('body, html').animate({
-      scrollTop: offset
-    }, 500);
-  });
+  $('body, html').animate({
+    scrollTop: offset
+  }, 500);
+});
 
     //Отмена скролла 
 
@@ -93,11 +93,49 @@ $('.header--about__hidden-button').click(function(event){
         $('.popup--container').fadeToggle(enableScroll);
         $('.popup--container__form').reset();
       });
-
-      $('.popup--container__tel').inputmask({'mask' : '+7 999 999 99 99'});
+//маска телефонной формы
+  $('.popup--container__tel').inputmask({'mask' : '+7 999 999 99 99'});
+//Ваидация
+/*  $(form).each(function(){
+    $(this).validate({
+      errorPlacement(errorForm, element){
+        return true;
+      },
+        focusInvalid: false,
+        rules: {
+          name: {
+            required: true,
+          },
+          email: {
+            required: true,
+            email: true,
+          },
+          tel: {
+            required: true,
+            digits: true,
+          },
+        },
+        submitHandler(form) {
+          let th = $(form);
+          let pop = $('.popup--container');
+    
+        $.ajax({
+          type: "POST",
+          url: "mail.php",
+          data: th.serialize(),
+          success: function (data) {
+              th.reset;  
+              setTimeout(function () {
+                pop.fadeToggle(enableScroll)
+              }, 400);
+          }  
+        });
+      }
+  });
+});*/
 
 //Форма      
-   $('.popup--container__select').click(function(e){
+  $('.popup--container__select').click(function(e){
 
     e.preventDefault();
     
