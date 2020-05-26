@@ -95,62 +95,44 @@ $('.header--about__item a, .footer--container__item a').click(function(event){
       });
 //маска телефонной формы
   $('.popup--container__tel').inputmask({'mask' : '+7 999 999 99 99'});
-//Ваидация
-/*  $(form).each(function(){
-    $(this).validate({
-      errorPlacement(errorForm, element){
-        return true;
-      },
-        focusInvalid: false,
-        rules: {
-          name: {
-            required: true,
-          },
-          email: {
-            required: true,
-            email: true,
-          },
-          tel: {
-            required: true,
-            digits: true,
-          },
-        },
-        submitHandler(form) {
-          let th = $(form);
-          let pop = $('.popup--container');
-    
-        $.ajax({
+
+$('.popup--container__select').click(function () {
+  let name = $(this).parent().find('input[name="name"]').val();
+  let email = $(this).parent().find('input[name="email"]').val();
+  let phone = $(this).parent().find('input[name="tel"]').val();
+  send(email, name, phone);
+
+});
+
+function emailValidate(email, name, phone) {
+  if (email != '') {
+      var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+      if (pattern.test(email)) {
+          if (name == '')
+              alert('Поле имя не должно быть пустым!');
+          else if (phone != '') {
+              return true;
+          } else
+              alert('Поле телефон не должно быть пустым!');
+      } else {
+          alert("Введите корректный e-mail!")
+      }
+  } else {
+      alert('Поле e-mail не должно быть пустым!');
+  }
+  return false;
+}
+
+function send(email, name, phone) {
+  if (emailValidate(email, name, phone)) {
+      $.ajax({
           type: "POST",
           url: "mail.php",
-          data: th.serialize(),
-          success: function (data) {
-              th.reset;  
-              setTimeout(function () {
-                pop.fadeToggle(enableScroll)
-              }, 400);
-          }  
-        });
-      }
-  });
-});*/
+          data: {email: email, name: name, phone: phone},
+          success: function (req) {
+              location.href = "http://unsung-developer.ru/";
+          }
+      });
 
-//Форма      
-  $('.popup--container__select').click(function(e){
-
-    e.preventDefault();
-    
-    let th = $('form')
-    let pop = $('.popup--container')
-    
-    $.ajax({
-    type: "POST",
-    url: "mail.php",
-    data: th.serialize(),
-    success: function (data) {
-        th.reset;  
-        setTimeout(function () {
-          pop.fadeToggle(enableScroll)
-        }, 400);
-    }
-    });
-});  
+  }
+}
