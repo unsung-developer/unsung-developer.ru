@@ -342,8 +342,8 @@
     .popup {
         position: relative;
         width: 80%;
-        height: 500px;
-        margin: 50px auto;
+        height: 400px;
+        margin: 10px auto;
         padding: 20px;
     }
 
@@ -356,7 +356,7 @@
 
     .popup--container__title {
         font-size: 24px;
-        margin: 30px 0;
+        margin: 0 0 10px;
     }
 
     .popup--container__desc {

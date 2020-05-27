@@ -80,6 +80,7 @@ $('.header--about__item a, .footer--container__item a').click(function(event){
 
 //Всплывающее окно      
       $('.common__button').click(function(){
+        $('.popup--container__form')[0].reset();
         $('.popup--container').fadeToggle(disableScroll);
       });
   
@@ -91,7 +92,6 @@ $('.header--about__item a, .footer--container__item a').click(function(event){
 
       $('.popup--container__button').click(function(){
         $('.popup--container').fadeToggle(enableScroll);
-        $('.popup--container__form').reset();
       });
 //маска телефонной формы
   $('.popup--container__tel').inputmask({'mask' : '+7 999 999 99 99'});
